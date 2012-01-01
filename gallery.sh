@@ -23,8 +23,8 @@ DEST_DIR="${ROOT_DIR}/${DEST_REL_DIR}"
 PREVIEW_DIR="${DEST_DIR}/${PREVIEW_SUBDIR}"
 THUMB_DIR="${DEST_DIR}/${THUMB_SUBDIR}"
 
-echo converting from "$SOURCE_DIR" to "$DEST_DIR"
 [ -e "$DEST_DIR" ] || mkdir "$DEST_DIR"
+echo converting from "$SOURCE_DIR" to "$DEST_DIR"
 [ -e "$PREVIEW_DIR" ] || mkdir "$PREVIEW_DIR"
 [ -e "$THUMB_DIR" ] || mkdir "$THUMB_DIR"
 PHOTO_COUNT=0
@@ -80,7 +80,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
     NAME=${CUR_PHOTO_NAME%.*}
     PREVIEW_XML=$DEST_DIR/$NAME.xml
     cat > $PREVIEW_XML <<EOF
-      <? xml version='1.0' ?>
+      <?xml version='1.0' ?>
       <image-preview>
         <thumbnail src="$DEST_THUMB"/>
         <image src="$DEST_PREVIEW"/>
@@ -112,8 +112,8 @@ EOF
   # output index page
   INDEX_XML=$DEST_DIR/$INDEX_NAME.xml
   cat > $INDEX_XML <<EOF
-    <? xml version='1.0' ?>
-    <album>
+    <?xml version='1.0' ?>
+    <album title="$DEST_REL_DIR">
 EOF
   CUR_DIR=0
   while [ $CUR_DIR -lt $DIR_COUNT ]; do
@@ -148,3 +148,4 @@ EOF
 else
   echo 'failed to create scaled image directory. file in the way?'
 fi
+
