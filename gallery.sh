@@ -8,7 +8,7 @@ THUMB_SIZE='200'
 INDEX_NAME='index'
 ALBUM_THUMBNAIL_NAME='album_thumbnail.jpg'
 
-if [ ! -d "$1" -o ! -d "$2" -o ! -d "$3" ]; then
+if [ ! -d "$1" -o ! -d "$2" -o "" = "$3" ]; then
   echo 'Specify the root directory of the web (absolute, or relative to cwd)'
   echo 'Specify a source directory relative to the root of the web' 
   echo 'Specify a destination directory relative to the root of the web'
@@ -18,17 +18,18 @@ fi
 ROOT_DIR="$1"
 SRC_REL_DIR="$2"
 DEST_REL_DIR="$3"
+shift 3
 SOURCE_DIR="${ROOT_DIR}/${SRC_REL_DIR}"
 DEST_DIR="${ROOT_DIR}/${DEST_REL_DIR}"
 PREVIEW_DIR="${DEST_DIR}/${PREVIEW_SUBDIR}"
 THUMB_DIR="${DEST_DIR}/${THUMB_SUBDIR}"
 
 [ -e "$DEST_DIR" ] || mkdir "$DEST_DIR"
-echo converting from "$SOURCE_DIR" to "$DEST_DIR"
 [ -e "$PREVIEW_DIR" ] || mkdir "$PREVIEW_DIR"
 [ -e "$THUMB_DIR" ] || mkdir "$THUMB_DIR"
 PHOTO_COUNT=0
 if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
+  echo converting from "$SOURCE_DIR" to "$DEST_DIR"
   IFS="|"
   # make preview and thumbnail images
   for f in $(find "$SOURCE_DIR" -maxdepth 1 \( -iname '*.jpg' \
@@ -65,7 +66,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
   DIR_COUNT=0
   for DIR in $(find "$SOURCE_DIR" -mindepth 1 -maxdepth 1 -type d -printf "%f|"); 
   do
-    $0 "$ROOT_DIR" "$SRC_REL_DIR/$DIR" "$DEST_REL_DIR/$DIR" "$SRC_REL_DIR"
+    $0 "$ROOT_DIR" "$SRC_REL_DIR/$DIR" "$DEST_REL_DIR/$DIR" "${SRC_REL_DIR##*/}"
     DIR_LIST[$DIR_COUNT]="$DIR"
     DIR_COUNT=$((DIR_COUNT+1))
   done
@@ -85,7 +86,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
         <thumbnail src="$DEST_THUMB"/>
         <image src="$DEST_PREVIEW"/>
         <full-size src="$SRC_IMAGE"/>
-        <index loc="$INDEX_NAME.html"/>
+        <index loc="$INDEX_NAME.html#photo$CUR_PHOTO"/>
 EOF
     if [ $CUR_PHOTO -gt 0 ]; then
       PREVIOUS=${PHOTO_LIST[(($CUR_PHOTO-1))]}
@@ -110,21 +111,27 @@ EOF
   done
 
   # output index page
-  INDEX_XML=$DEST_DIR/$INDEX_NAME.xml
-  cat > $INDEX_XML <<EOF
+  INDEX_XML="$DEST_DIR/$INDEX_NAME.xml"
+  cat > ${INDEX_XML} <<EOF
     <?xml version='1.0' ?>
-    <album title="$DEST_REL_DIR">
+    <album title="${DEST_REL_DIR##*/}">
 EOF
-  CUR_DIR=0
-  while [ $CUR_DIR -lt $DIR_COUNT ]; do
+
+  # output parent
+  if [ 0 -lt $# ]; then
+    cat >> ${INDEX_XML} <<EOF
+    <parent title="$1" link="../${INDEX_NAME}.html"/>
+EOF
+  fi
+
+  for (( CUR_DIR=0 ; $CUR_DIR < $DIR_COUNT ; CUR_DIR=$((CUR_DIR+1)) )) do
     CUR_DIR_NAME=${DIR_LIST[$CUR_DIR]}
-    cat >> $INDEX_XML <<EOF
+    cat >> ${INDEX_XML} <<EOF
       <sub-album loc="$CUR_DIR_NAME/$INDEX_NAME.html">
         <thumbnail src="$CUR_DIR_NAME/$ALBUM_THUMBNAIL_NAME"/>
         $CUR_DIR_NAME
       </sub-album>
 EOF
-    CUR_DIR=$((CUR_DIR+1))
   done
   CUR_PHOTO=0
   while [ $CUR_PHOTO -lt $PHOTO_COUNT ]; do
@@ -134,6 +141,7 @@ EOF
     PREVIEW_NAME="$NAME.html"
     cat >> $INDEX_XML <<EOF
       <photo
+        id="photo$CUR_PHOTO"
         thumbnail="$DEST_THUMB"
         preview-loc="$PREVIEW_NAME">
         $NAME
