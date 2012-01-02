@@ -128,8 +128,9 @@ EOF
     CUR_DIR_NAME=${DIR_LIST[$CUR_DIR]}
     cat >> ${INDEX_XML} <<EOF
   <sub-album loc="$CUR_DIR_NAME/$INDEX_NAME.html">
-    <thumbnail src="$CUR_DIR_NAME/$ALBUM_THUMBNAIL_NAME"/>
-    $CUR_DIR_NAME
+    <thumbnail src="$CUR_DIR_NAME/$ALBUM_THUMBNAIL_NAME">
+      $CUR_DIR_NAME
+    </thumbnail>
   </sub-album>
 EOF
   done
@@ -140,12 +141,13 @@ EOF
     NAME=${CUR_PHOTO_NAME%.*}
     PREVIEW_NAME="$NAME.html"
     cat >> $INDEX_XML <<EOF
-  <photo
+  <preview
     id="photo$CUR_PHOTO"
-    thumbnail="$DEST_THUMB"
-    preview-loc="$PREVIEW_NAME">
-    $NAME
-  </photo>
+    loc="$PREVIEW_NAME">
+    <thumbnail src="$DEST_THUMB">
+      $NAME
+    </thumbnail>
+  </preview>
 EOF
     CUR_PHOTO=$((CUR_PHOTO+1))
   done

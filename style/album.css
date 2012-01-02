@@ -1,45 +1,57 @@
-.imgBlock {
-	float: left;
-	margin-right: 10px
-	margin-top: 10px
+div.album-index {
+  color:black;
+  font-variant:small-caps;
 }
 
-img.album {
+a.visited {
+  color:#aaa;
+}
+
+div.preview-thumbnail {
+	float: left;
+	margin-right: 10px;
+	margin-top: 10px;
+  text-align:right;
+}
+
+div.preview {
+  width:824px;
+}
+
+div.preview-control {
+  text-align:center;
+  font-variant:small-caps;
+  font-size:11pt;
+  padding-top:8pt;
+  padding-bottom:12pt;
+}
+
+a.index-link {
+  margin-right: 40px;
+}
+
+div.preview-previous-navigation {
+  float:left;
+}
+
+div.preview-next-navigation {
+  float:right;
+}
+
+img.image-preview {
 	background-color: black;
-	border: #aaa 4pt solid;
-	padding: 3px;
-	text-decoration: none
+	border: #aaa 6pt inset;
+	padding: 3pt;
 }
 
 img.thumbnail {
-	border: black 1pt solid;
-	padding: 2px;
-	text-decoration: none
-}
-
-.thumbnail-caption {
-	font-size:small;
-	width:200px;
-}
-
-.control {
-	margin: 10pt;
-	border: outset 4pt;
+  background-color: black;
+	border: black 4pt inset;
 	padding: 2pt;
-	cursor: pointer
 }
 
-.controlRow {
-	margin-bottom: 20pt
+div.thumbnail-caption {
+	font-size:small;
+  padding-right:8pt;
 }
 
-.image-credit {
-	font-size: x-small;
-	text-align: top;
-}
-
-.image-index-credit {
-	font-size:x-small;
-	font-variant:small-caps;
-	margin-left:3pt;
-}
