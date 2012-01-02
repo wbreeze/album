@@ -1,0 +1,28 @@
+<project name="site build" default="site">
+  
+  <target name="styleDepends">
+    <dependset>
+      <srcfileset dir=".">
+        <patternset>
+          <include name="style/*.xsl"/>
+        </patternset>
+      </srcfileset>
+      <targetfileset dir=".">
+        <patternset>
+          <include name="albumdir/**/*.html"/>
+        </patternset>
+      </targetfileset>
+    </dependset>  
+  </target>
+  	
+  <target name="site" depends="styleDepends">
+    <xslt extension=".html" destdir="." style="style/site.xsl">
+      <patternset id="sitePages">
+        <include name="albumdir/**/*.xml"/>
+        <exclude name="build.xml"/>
+        <exclude name=".*"/>
+      </patternset>
+    </xslt>
+  </target>
+
+</project>

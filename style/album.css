@@ -1,0 +1,45 @@
+.imgBlock {
+	float: left;
+	margin-right: 10px
+	margin-top: 10px
+}
+
+img.album {
+	background-color: black;
+	border: #aaa 4pt solid;
+	padding: 3px;
+	text-decoration: none
+}
+
+img.thumbnail {
+	border: black 1pt solid;
+	padding: 2px;
+	text-decoration: none
+}
+
+.thumbnail-caption {
+	font-size:small;
+	width:200px;
+}
+
+.control {
+	margin: 10pt;
+	border: outset 4pt;
+	padding: 2pt;
+	cursor: pointer
+}
+
+.controlRow {
+	margin-bottom: 20pt
+}
+
+.image-credit {
+	font-size: x-small;
+	text-align: top;
+}
+
+.image-index-credit {
+	font-size:x-small;
+	font-variant:small-caps;
+	margin-left:3pt;
+}
