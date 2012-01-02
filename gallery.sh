@@ -8,7 +8,7 @@ THUMB_SIZE='200'
 INDEX_NAME='index'
 ALBUM_THUMBNAIL_NAME='album_thumbnail.jpg'
 
-if [ ! -d "$1" -o ! -d "$2" -o "" = "$3" ]; then
+if [ ! -d "$1" -o ! -d "$1/$2" -o "" = "$3" ]; then
   echo 'Specify the root directory of the web (absolute, or relative to cwd)'
   echo 'Specify a source directory relative to the root of the web' 
   echo 'Specify a destination directory relative to the root of the web'
@@ -53,7 +53,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
   done
 
   # make album thumbnail
-  if [ 0 -lt $((PHOTO_COUNT-1)) ]; then
+  if [ 0 -lt $PHOTO_COUNT ]; then
     SRC_IMAGE="$SOURCE_DIR/${PHOTO_LIST[0]}"
     DEST_IMAGE="$DEST_DIR/$ALBUM_THUMBNAIL_NAME"
     [ "$SRC_IMAGE" -nt "$DEST_IMAGE" ] && convert "$SRC_IMAGE" \
