@@ -34,11 +34,11 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
     CURF=${SRC_IMAGE##*/}
     DEST_PREVIEW="$PREVIEW_DIR/$CURF"
     DEST_THUMB="$THUMB_DIR/$CURF"
-    [ "$SRC_IMAGE" -nt "$DEST_PREVIEW" ] && convert "$SRC_IMAGE" \
+    [ "$SRC_IMAGE" -nt "$DEST_PREVIEW" ] && echo "$DEST_PREVIEW" && convert "$SRC_IMAGE" \
       -auto-orient \
       -resize ${PREVIEW_SIZE}x${PREVIEW_SIZE} \
       "$DEST_PREVIEW"
-    [ "$SRC_IMAGE" -nt "$DEST_THUMB" ] && convert "$SRC_IMAGE" \
+    [ "$SRC_IMAGE" -nt "$DEST_THUMB" ] && echo "$DEST_THUMB" && convert "$SRC_IMAGE" \
       -auto-orient \
       -resize ${THUMB_SIZE}x${THUMB_SIZE} \
       "$DEST_THUMB"
@@ -53,7 +53,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
   if [ 0 -lt $PHOTO_COUNT ]; then
     SRC_IMAGE="$SOURCE_DIR/${PHOTO_LIST[0]}"
     DEST_IMAGE="$DEST_DIR/$ALBUM_THUMBNAIL_NAME"
-    [ "$SRC_IMAGE" -nt "$DEST_IMAGE" ] && convert "$SRC_IMAGE" \
+    [ "$SRC_IMAGE" -nt "$DEST_IMAGE" ] && echo "$DEST_IMAGE" && convert "$SRC_IMAGE" \
       -auto-orient \
       -resize ${THUMB_SIZE}x${THUMB_SIZE} \
       "$DEST_IMAGE"
@@ -76,6 +76,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
     DEST_THUMB="$THUMB_SUBDIR/$CUR_PHOTO_NAME"
     NAME=${CUR_PHOTO_NAME%.*}
     PREVIEW_XML=$DEST_DIR/$NAME.xml
+    echo "$PREVIEW_XML"
     cat > "$PREVIEW_XML" <<EOF
 <?xml version='1.0' ?>
 <image-preview>
@@ -107,6 +108,7 @@ EOF
 
   # output index page
   INDEX_XML="$DEST_DIR/$INDEX_NAME.xml"
+  echo "$INDEX_XML"
   cat > ${INDEX_XML} <<EOF
 <?xml version='1.0' ?>
 <album title="${DEST_REL_DIR##*/}">
@@ -135,7 +137,7 @@ EOF
     DEST_THUMB="$THUMB_SUBDIR/$CUR_PHOTO_NAME"
     NAME=${CUR_PHOTO_NAME%.*}
     PREVIEW_NAME="$NAME.html"
-    cat >> $INDEX_XML <<EOF
+    cat >> "$INDEX_XML" <<EOF
   <preview
     id="photo$CUR_PHOTO"
     loc="$PREVIEW_NAME">
@@ -145,7 +147,7 @@ EOF
   </preview>
 EOF
   done
-  cat >> $INDEX_XML <<EOF
+  cat >> "$INDEX_XML" <<EOF
 </album>
 EOF
 
