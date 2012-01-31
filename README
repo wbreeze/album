@@ -1,0 +1,27 @@
+Shell script reads a directory tree of images, creates a parallel tree of
+thumbnail images, preview images, and static html page views all linked
+together.  The script actually generates XML pages.  Use provided XSL and CSS
+stylesheets to generate and style the HTML.
+
+The www directory contains a few odd sample pictures for testing.
+
+Usage:
+
+Invoke gallery.sh with three arguments-
+- the first is the common root for the (existing) directory of photos and
+  the (existing or to be) directory of gallery files
+- the second is the source directory of images, relative to first
+- the third is the destination directory name, relative to the first
+
+For example, './gallery.sh www photos album'
+
+Next, run an XSL transform of the XML files in the result, album
+directory.  Use
+- the build.xml script if you have ant
+- the transform.sh script if you have Xalan Java
+- the c-transform.sh script if you have Xalan C
+
+For example, './c_transform style/site.xsl www album'
+
+Finally, point your browser to www/album/index.html
+
