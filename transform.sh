@@ -18,6 +18,7 @@ do
   SRC_XML="$DEST_DIR/$f"
   DEST_HTML="$DEST_DIR/${f%'xml'}html"
   if [ ! -f "$DEST_HTML" -o "$SRC_XML" -nt "$DEST_HTML" ] ; then
+    echo "$DEST_HTML"
     xalan -xsl "$TRANSFORM" -in "$SRC_XML" -out "$DEST_HTML"
   fi
 done
