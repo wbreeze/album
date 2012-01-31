@@ -21,7 +21,7 @@ directory.  Use
 - the transform.sh script if you have Xalan Java
 - the c-transform.sh script if you have Xalan C
 
-For example, './c_transform style/site.xsl www album'
+For example, './c_transform.sh style/site.xsl www album'
 
 Finally, point your browser to www/album/index.html
 
