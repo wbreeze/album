@@ -44,7 +44,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
       "$DEST_THUMB"
     PHOTO_LIST[$PHOTO_COUNT]=$CURF
     PHOTO_COUNT=$((PHOTO_COUNT+1))
-  done < <(find "$SOURCE_DIR" -maxdepth 1 \( -iname '*.jpg' \
+  done < <(find -L "$SOURCE_DIR" -maxdepth 1 \( -iname '*.jpg' \
      -o -iname '*.jpeg' \
      -o -iname '*.png' \) \
      -a -type f -print0 | sort -z )
@@ -66,7 +66,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
     $0 "$ROOT_DIR" "$SRC_REL_DIR/$DIR" "$DEST_REL_DIR/$DIR" "${SRC_REL_DIR##*/}"
     DIR_LIST[$DIR_COUNT]="$DIR"
     DIR_COUNT=$((DIR_COUNT+1))
-  done < <(find "$SOURCE_DIR" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z) 
+  done < <(find -L "$SOURCE_DIR" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z) 
 
   # output preview pages
   for (( CUR_PHOTO=0 ; $CUR_PHOTO < $PHOTO_COUNT ; CUR_PHOTO=$((CUR_PHOTO+1)) )) do
