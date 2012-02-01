@@ -109,21 +109,21 @@ EOF
   # output index page
   INDEX_XML="$DEST_DIR/$INDEX_NAME.xml"
   echo "$INDEX_XML"
-  cat > ${INDEX_XML} <<EOF
+  cat > "$INDEX_XML" <<EOF
 <?xml version='1.0' ?>
 <album title="${DEST_REL_DIR##*/}">
 EOF
 
   # output parent
   if [ 0 -lt $# ]; then
-    cat >> ${INDEX_XML} <<EOF
+    cat >> "$INDEX_XML" <<EOF
   <parent title="$1" link="../${INDEX_NAME}.html"/>
 EOF
   fi
 
   for (( CUR_DIR=0 ; $CUR_DIR < $DIR_COUNT ; CUR_DIR=$((CUR_DIR+1)) )) do
     CUR_DIR_NAME=${DIR_LIST[$CUR_DIR]}
-    cat >> ${INDEX_XML} <<EOF
+    cat >> "$INDEX_XML" <<EOF
   <sub-album loc="$CUR_DIR_NAME/$INDEX_NAME.html">
     <thumbnail src="$CUR_DIR_NAME/$ALBUM_THUMBNAIL_NAME">
       $CUR_DIR_NAME
