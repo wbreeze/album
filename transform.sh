@@ -12,18 +12,14 @@ ROOT_DIR="$2"
 DEST_REL_DIR="$3"
 DEST_DIR="${ROOT_DIR}/${DEST_REL_DIR}"
 
-IFS="|"
-for f in $(find "$DEST_DIR" -maxdepth 1 -iname '*.xml' -a -type f -printf "%f|")
-do
-  SRC_XML="$DEST_DIR/$f"
-  DEST_HTML="$DEST_DIR/${f%'xml'}html"
+while IFS= read -d $'\0' -r SRC_XML ; do
+  DEST_HTML="${SRC_XML%'xml'}html"
   if [ ! -f "$DEST_HTML" -o "$SRC_XML" -nt "$DEST_HTML" ] ; then
     echo "$DEST_HTML"
-    xalan -xsl "$TRANSFORM" -in "$SRC_XML" -out "$DEST_HTML"
+    xalan -xsl "$TRANSFORM" -in "${SRC_XML}" -out "${DEST_HTML}"
   fi
-done
+done < <(find "${DEST_DIR}" -maxdepth 1 -iname '*.xml' -a -type f -print0)
 
-for d in $(find "$DEST_DIR" -mindepth 1 -maxdepth 1 -type d -printf "%f|")
-do
-  $0 "$TRANSFORM" "$DEST_DIR" "$d"
-done
+while IFS= read -d $'\0' -r DIR ; do
+  $0 "$TRANSFORM" "${DEST_DIR}" "${DIR##*/}"
+done < <(find "${DEST_DIR}" -mindepth 1 -maxdepth 1 -type d -print0)
