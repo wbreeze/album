@@ -9,7 +9,7 @@
       </srcfileset>
       <targetfileset dir=".">
         <patternset>
-          <include name="albumdir/**/*.html"/>
+          <include name="www/albumdir/**/*.html"/>
         </patternset>
       </targetfileset>
     </dependset>  
@@ -18,7 +18,7 @@
   <target name="site" depends="styleDepends">
     <xslt extension=".html" destdir="." style="style/site.xsl">
       <patternset id="sitePages">
-        <include name="albumdir/**/*.xml"/>
+        <include name="www/albumdir/**/*.xml"/>
         <exclude name="build.xml"/>
         <exclude name=".*"/>
       </patternset>
