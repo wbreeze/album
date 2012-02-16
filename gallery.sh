@@ -71,9 +71,10 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
   # output preview pages
   for (( CUR_PHOTO=0 ; $CUR_PHOTO < $PHOTO_COUNT ; CUR_PHOTO=$((CUR_PHOTO+1)) )) do
     CUR_PHOTO_NAME=${PHOTO_LIST[$CUR_PHOTO]}
-    SRC_IMAGE="/$SRC_REL_DIR/$CUR_PHOTO_NAME"
-    DEST_PREVIEW="$PREVIEW_SUBDIR/$CUR_PHOTO_NAME"
-    DEST_THUMB="$THUMB_SUBDIR/$CUR_PHOTO_NAME"
+    CUR_PHOTO_REF=$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "${CUR_PHOTO_NAME}")
+    SRC_IMAGE="/$SRC_REL_DIR/$CUR_PHOTO_REF"
+    DEST_PREVIEW="$PREVIEW_SUBDIR/$CUR_PHOTO_REF"
+    DEST_THUMB="$THUMB_SUBDIR/$CUR_PHOTO_REF"
     NAME=${CUR_PHOTO_NAME%.*}
     PREVIEW_XML=$DEST_DIR/$NAME.xml
     echo "$PREVIEW_XML"
@@ -87,17 +88,19 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
 EOF
     if [ $CUR_PHOTO -gt 0 ]; then
       PREVIOUS=${PHOTO_LIST[(($CUR_PHOTO-1))]}
+      PREVIOUS_REF=$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "${PREVIOUS}")
       cat >> "$PREVIEW_XML" <<EOF
-  <previous loc="${PREVIOUS%.*}.html">
-    <thumbnail src="$THUMB_SUBDIR/$PREVIOUS"/>
+  <previous loc="${PREVIOUS_REF%.*}.html">
+    <thumbnail src="$THUMB_SUBDIR/$PREVIOUS_REF"/>
   </previous>
 EOF
     fi
     if [ $CUR_PHOTO -lt $((PHOTO_COUNT-1)) ]; then
       NEXT=${PHOTO_LIST[(($CUR_PHOTO+1))]}
+      NEXT_REF=$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "${NEXT}")
       cat >> "$PREVIEW_XML" <<EOF
-  <next loc="${NEXT%.*}.html">
-    <thumbnail src="$THUMB_SUBDIR/$NEXT"/>
+  <next loc="${NEXT_REF%.*}.html">
+    <thumbnail src="$THUMB_SUBDIR/$NEXT_REF"/>
   </next>
 EOF
     fi
@@ -134,15 +137,16 @@ EOF
 
   for (( CUR_PHOTO=0 ; $CUR_PHOTO < $PHOTO_COUNT ; CUR_PHOTO=$((CUR_PHOTO+1)) )) do
     CUR_PHOTO_NAME=${PHOTO_LIST[$CUR_PHOTO]}
-    DEST_THUMB="$THUMB_SUBDIR/$CUR_PHOTO_NAME"
-    NAME=${CUR_PHOTO_NAME%.*}
+    CUR_PHOTO_REF=$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "${CUR_PHOTO_NAME}")
+    DEST_THUMB="$THUMB_SUBDIR/$CUR_PHOTO_REF"
+    NAME=${CUR_PHOTO_REF%.*}
     PREVIEW_NAME="$NAME.html"
     cat >> "$INDEX_XML" <<EOF
   <preview
     id="photo$CUR_PHOTO"
     loc="$PREVIEW_NAME">
     <thumbnail src="$DEST_THUMB">
-      $NAME
+      $(echo ${CUR_PHOTO_NAME%.*} | sed -e 's/&/&amp;/g')
     </thumbnail>
   </preview>
 EOF
