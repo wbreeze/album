@@ -7,11 +7,18 @@ a.visited {
   color:#aaa;
 }
 
-div.preview-thumbnail {
+div.preview-thumbnail,
+div.directory-thumbnail {
 	float: left;
 	margin-right: 10px;
 	margin-top: 10px;
   text-align:right;
+}
+
+div.directory-thumbnail {
+  background-color: #ccc;
+  padding-left:6px;
+  padding-right:6px;
 }
 
 div.preview {

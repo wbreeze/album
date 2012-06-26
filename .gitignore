@@ -1,2 +1,4 @@
 **/albumdir
 .*.swp
+site.conf
+www/style

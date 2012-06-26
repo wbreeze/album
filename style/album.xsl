@@ -123,12 +123,25 @@
   </div>
 </xsl:template>
 
-<xsl:template match="preview|sub-album">
+<xsl:template match="preview">
   <div class="preview-thumbnail">
     <a class="thumbnail-link">
       <xsl:attribute name="name">
         <xsl:value-of select="@id"/>
       </xsl:attribute>
+      <xsl:attribute name="href">
+        <xsl:value-of select="@loc" />
+      </xsl:attribute>
+      <div class="thumbnail">
+        <xsl:apply-templates select="thumbnail"/>
+      </div>
+    </a>
+  </div>
+</xsl:template>
+
+<xsl:template match="sub-album">
+  <div class="directory-thumbnail">
+    <a class="thumbnail-link">
       <xsl:attribute name="href">
         <xsl:value-of select="@loc" />
       </xsl:attribute>
