@@ -25,3 +25,16 @@ For example, './c_transform.sh style/site.xsl www album'
 
 Finally, point your browser to www/album/index.html
 
+Trouble:
+
+Can't locate URI/Escape.pm in @INC (@INC contains: ...
+
+If you get this message, your shell cannot find the perl script used to escape file names that contain special characters.  Resolve it as follows.
+
+1. issue launch Perl’s CPAN
+   sudo perl -MCPAN -e shell
+2. Once CPAN launches, install the URI/Escape Perl module.
+   cpan> install URI::Escape
+3. Exit CPAN
+   cpan> exit
+
