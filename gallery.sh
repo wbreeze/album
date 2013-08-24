@@ -63,7 +63,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
   DIR_COUNT=0
   while IFS= read -d $'\0' -r SRC_DIR ; do
     DIR=${SRC_DIR##*/}
-    $0 "$ROOT_DIR" "$SRC_REL_DIR/$DIR" "$DEST_REL_DIR/$DIR" "${SRC_REL_DIR##*/}"
+    $0 "$ROOT_DIR" "$SRC_REL_DIR/$DIR" "$DEST_REL_DIR/$DIR" "${DEST_REL_DIR##*/}"
     DIR_LIST[$DIR_COUNT]="$DIR"
     DIR_COUNT=$((DIR_COUNT+1))
   done < <(find -L "$SOURCE_DIR" -mindepth 1 -maxdepth 1 -type d -print0 | sort -z) 
