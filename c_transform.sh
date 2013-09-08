@@ -16,7 +16,7 @@ while IFS= read -d $'\0' -r SRC_XML ; do
   DEST_HTML="${SRC_XML%'xml'}html"
   if [ ! -f "$DEST_HTML" -o "$SRC_XML" -nt "$DEST_HTML" ] ; then
     echo "$DEST_HTML"
-    xalan "$SRC_XML" "$TRANSFORM" > "$DEST_HTML"
+    Xalan "$SRC_XML" "$TRANSFORM" > "$DEST_HTML"
   fi
 done < <(find "${DEST_DIR}" -maxdepth 1 -iname '*.xml' -a -type f -print0)
 
