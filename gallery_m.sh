@@ -38,7 +38,7 @@ ORIG_DIR="${DEST_DIR}/${ORIGINALS_SUBDIR}"
 [ -e "$ORIG_DIR" ] || mkdir "$ORIG_DIR"
 [ -e "$PREVIEW_DIR" ] || mkdir "$PREVIEW_DIR"
 [ -e "$THUMB_DIR" ] || mkdir "$THUMB_DIR"
-if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" -a -d $ORIG_DIR ]; then
+if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" -a -d "$ORIG_DIR" ]; then
   # make preview and thumbnail images
   # make hard links to originals
   PHOTO_COUNT=0
@@ -61,6 +61,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" -a -d $ORIG_DIR ]; then
     PHOTO_COUNT=$((PHOTO_COUNT+1))
   done < <(find -L "$SOURCE_DIR" -maxdepth 1 \( -iname '*.jpg' \
      -o -iname '*.jpeg' \
+     -o -iname '*.gif' \
      -o -iname '*.png' \) \
      -a -type f -print0 | sort -z )
 
@@ -140,11 +141,11 @@ EOF
   fi
 
   for (( CUR_DIR=0 ; $CUR_DIR < $DIR_COUNT ; CUR_DIR=$((CUR_DIR+1)) )) do
-    CUR_DIR_NAME=${DIR_LIST[$CUR_DIR]}
+    CUR_DIR_NAME=$(perl -MURI::Escape -e 'print uri_escape($ARGV[0]);' "${DIR_LIST[$CUR_DIR]}")
     cat >> "$INDEX_XML" <<EOF
   <sub-album loc="$CUR_DIR_NAME/$INDEX_NAME.html">
     <thumbnail src="$CUR_DIR_NAME/$ALBUM_THUMBNAIL_NAME">
-      $CUR_DIR_NAME
+      ${DIR_LIST[$CUR_DIR]}
     </thumbnail>
   </sub-album>
 EOF
