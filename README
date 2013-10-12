@@ -31,10 +31,52 @@ Can't locate URI/Escape.pm in @INC (@INC contains: ...
 
 If you get this message, your shell cannot find the perl script used to escape file names that contain special characters.  Resolve it as follows.
 
-1. issue launch Perl’s CPAN
+1. launch Perl’s CPAN:
    sudo perl -MCPAN -e shell
-2. Once CPAN launches, install the URI/Escape Perl module.
+2. Once CPAN launches, install the URI/Escape Perl module:
    cpan> install URI::Escape
-3. Exit CPAN
+3. Exit CPAN:
    cpan> exit
+
+You will need an XSL Transform engine, such as Xalan.  
+Xalan in turn requires the XML parser Xerces.
+These short notes will help you find and install Xerces and Xalan.  
+
+Xerces installation:
+
+http://xerces.apache.org/xerces-c/
+
+Download, verify, extract.
+Follow the build instructions.  On a Linux host, the following might work well
+
+1. cd xerces-c-3.11
+2. ./configure --prefix=$HOME/Xerces
+3. make
+4. make install
+
+You ought to have populated lib and bin directories in $HOME/Xerces.
+
+Xalan installation:
+
+https://xalan.apache.org/xalan-c/index.html
+
+Download, verify, extract.
+Follow the build instructions.  On a Linux host, the following might work well
+
+1. cd xalan-c-1.11/c
+2. export XERCESCROOT=$HOME/Xerces
+3. export XALANCROOT=`pwd`
+4. ./runConfigure -p linux -c gcc -x g++ -P $HOME/Xalan
+5. make
+6. make install
+
+You ought to have populated lib and bin directories in $HOME/Xalan.
+
+In order to execute Xalan:
+
+export XERCESCROOT=$HOME/Xerces
+export XALANCROOT=`pwd`
+export LD_LIBRARY_PATH=$HOME/Xerces/lib:$HOME/Xalan/lib:$LD_LIBRARY_PATH
+export PATH=$HOME/Xalan/bin:$HOME
+Xalan
 
