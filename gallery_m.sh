@@ -22,6 +22,7 @@ if [ ! -d "$1" -o ! -d "$2" -o "" = "$3" ]; then
   echo 'Specify a source directory (absolute, or relative to cwd)'
   echo 'Specify a destination directory relative to the root of the web'
   echo 'An optional fourth parameter is a title for link to the index file in the parent directory'
+  echo 'An optional fifth parameter is the link value to the index file in the parent directory, defaults to "../index.html"'
   exit 1
 fi
 
@@ -135,8 +136,13 @@ EOF
 
   # output parent
   if [ 0 -lt $# ]; then
+    if [ 1 -lt $# ]; then
+      INDEX_LINK=$2
+    else
+      INDEX_LINK="../${INDEX_NAME}.html"
+    fi
     cat >> "$INDEX_XML" <<EOF
-  <parent title="$1" link="../${INDEX_NAME}.html"/>
+  <parent title="$1" link="${INDEX_LINK}"/>
 EOF
   fi
 
