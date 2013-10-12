@@ -75,7 +75,7 @@ You ought to have populated lib and bin directories in $HOME/Xalan.
 In order to execute Xalan:
 
 export XERCESCROOT=$HOME/Xerces
-export XALANCROOT=`pwd`
+export XALANCROOT=$HOME/Xalan
 export LD_LIBRARY_PATH=$HOME/Xerces/lib:$HOME/Xalan/lib:$LD_LIBRARY_PATH
 export PATH=$HOME/Xalan/bin:$HOME
 Xalan
