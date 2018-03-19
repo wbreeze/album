@@ -3,16 +3,33 @@ div.album-index {
   font-variant:small-caps;
 }
 
+@supports(display:grid) {
+  div.album-index {
+    display: grid;
+    grid-gap: 4pt;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 a.visited {
   color:#aaa;
 }
 
 div.preview-thumbnail,
 div.directory-thumbnail {
-	float: left;
-	margin-right: 10px;
-	margin-top: 10px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 10px;
   text-align:right;
+}
+
+@supports(display:grid) {
+  div.preview-thumbnail,
+  div.directory-thumbnail {
+    float: none;
+    margin: 0px;
+    display: inline-grid;
+  }
 }
 
 div.directory-thumbnail {
@@ -25,12 +42,28 @@ div.preview {
   width:824px;
 }
 
+@supports(display:grid) {
+  div.preview {
+    width: auto;
+    display: grid;
+    grid-gap: 4pt;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 div.preview-control {
   text-align:center;
   font-variant:small-caps;
   font-size:11pt;
   padding-top:8pt;
   padding-bottom:12pt;
+}
+
+@supports(display:grid) {
+  div.preview div.controls {
+    display: inline-grid;
+    grid-column: 1 / 1;
+  }
 }
 
 a.index-link {
@@ -46,19 +79,33 @@ div.preview-next-navigation {
 }
 
 img.image-preview {
-	background-color: black;
-	border: #aaa 6pt inset;
-	padding: 3pt;
+  background-color: black;
+  border: #aaa 6pt inset;
+  padding: 3pt;
 }
 
 img.thumbnail {
   background-color: black;
-	border: black 4pt inset;
-	padding: 2pt;
+  border: black 4pt inset;
+  padding: 2pt;
+}
+
+@supports(display:grid) {
+  img.image-preview {
+    width: calc(100% - 20pt);
+  }
+
+  img.thumbnail {
+    width: calc(100% - 14pt);
+  }
+
+  div.image-preview {
+    grid-column: 2 / span 3;
+  }
 }
 
 div.thumbnail-caption {
-	font-size:small;
+  font-size:small;
   padding-right:8pt;
 }
 

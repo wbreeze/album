@@ -12,11 +12,13 @@
 
 <xsl:template match="image-preview">
   <div class="preview">
-    <xsl:apply-templates select="previous"/>
-    <xsl:apply-templates select="next"/>
-    <div class='preview-control'>
-      <xsl:apply-templates select="index"/>
-      <xsl:apply-templates select="full-size"/>
+    <div class="controls">
+      <xsl:apply-templates select="previous"/>
+      <xsl:apply-templates select="next"/>
+      <div class='preview-control'>
+        <xsl:apply-templates select="index"/>
+        <xsl:apply-templates select="full-size"/>
+      </div>
     </div>
     <xsl:apply-templates select="image"/>
   </div>
