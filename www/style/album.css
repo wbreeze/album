@@ -45,16 +45,28 @@ div.preview div.controls {
   margin: 1% 0 1% 1.6%;
 }
 
-div.image-preview {
-  margin-left: 0px;
-}
-
 div.preview div.controls {
+  margin-left: 0px;
   width: 23.8%;
 }
 
 div.image-preview {
   width: 74.6%;
+}
+
+@media only screen and (max-width: 600px) {
+  div.preview div.controls,
+  div.image-preview {
+    margin: 1% 0 1% 0%;
+    width: 100%;
+  }
+  div.preview div.controls div {
+    float: left;
+    width: 32.26%;
+  }
+  div.preview div.controls div:first-child {
+    margin-left: 0px;
+  }
 }
 
 div.preview-control {
