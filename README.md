@@ -27,6 +27,8 @@ Finally, point your browser to `www/album/index.html`
 
 ## Trouble:
 
+### Can't locate Escape.pm
+
 ```
 Can't locate URI/Escape.pm in @INC (@INC contains: ...
 ```
@@ -40,6 +42,14 @@ file names that contain special characters.  Resolve it as follows:
    `cpan> install URI::Escape`
 3. Exit CPAN:
    `cpan> exit`
+
+### Missing stylesheets
+
+You'll need to copy the `.css` stylesheets from the `style` directory
+to a `style` directory in the root of your web directory.
+Alternatively, you can change the stylesheet references in
+`style/layout.xsl` and `style/album.xsl` to find these stylesheets
+in whatever location you would like.
 
 ## Xalan and Xerces
 You will need an XSL Transform engine, such as Xalan.  
