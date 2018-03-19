@@ -38,17 +38,23 @@ div.directory-thumbnail {
   padding-right:6px;
 }
 
-div.preview {
-  width:824px;
+div.image-preview,
+div.preview div.controls {
+  display: block;
+  float: left;
+  margin: 1% 0 1% 1.6%;
 }
 
-@supports(display:grid) {
-  div.preview {
-    width: auto;
-    display: grid;
-    grid-gap: 4pt;
-    grid-template-columns: repeat(4, 1fr);
-  }
+div.image-preview {
+  margin-left: 0px;
+}
+
+div.preview div.controls {
+  width: 23.8%;
+}
+
+div.image-preview {
+  width: 74.6%;
 }
 
 div.preview-control {
@@ -59,23 +65,8 @@ div.preview-control {
   padding-bottom:12pt;
 }
 
-@supports(display:grid) {
-  div.preview div.controls {
-    display: inline-grid;
-    grid-column: 1 / 1;
-  }
-}
-
 a.index-link {
   margin-right: 40px;
-}
-
-div.preview-previous-navigation {
-  float:left;
-}
-
-div.preview-next-navigation {
-  float:right;
 }
 
 img.image-preview {
@@ -97,10 +88,6 @@ img.thumbnail {
 
   img.thumbnail {
     width: calc(100% - 14pt);
-  }
-
-  div.image-preview {
-    grid-column: 2 / span 3;
   }
 }
 
