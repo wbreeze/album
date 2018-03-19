@@ -45,9 +45,7 @@ file names that contain special characters.  Resolve it as follows:
 
 ### Missing stylesheets
 
-You'll need to copy the `.css` stylesheets from the `style` directory
-to a `style` directory in the root of your web directory.
-Alternatively, you can change the stylesheet references in
+You can change the stylesheet references in
 `style/layout.xsl` and `style/album.xsl` to find these stylesheets
 in whatever location you would like.
 
