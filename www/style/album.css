@@ -3,14 +3,6 @@ div.album-index {
   font-variant:small-caps;
 }
 
-@supports(display:grid) {
-  div.album-index {
-    display: grid;
-    grid-gap: 4pt;
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 a.visited {
   color:#aaa;
 }
@@ -18,18 +10,14 @@ a.visited {
 div.preview-thumbnail,
 div.directory-thumbnail {
   float: left;
-  margin-right: 10px;
   margin-top: 10px;
   text-align:right;
+  width: 100%;
 }
 
-@supports(display:grid) {
-  div.preview-thumbnail,
-  div.directory-thumbnail {
-    float: none;
-    margin: 0px;
-    display: inline-grid;
-  }
+div.preview-thumbnail:,
+div.directory-thumbnail {
+  margin-left: 0px;
 }
 
 div.directory-thumbnail {
@@ -85,26 +73,50 @@ img.image-preview {
   background-color: black;
   border: #aaa 6pt inset;
   padding: 3pt;
+  width: calc(100% - 20pt);
 }
 
 img.thumbnail {
   background-color: black;
   border: black 4pt inset;
   padding: 2pt;
-}
-
-@supports(display:grid) {
-  img.image-preview {
-    width: calc(100% - 20pt);
-  }
-
-  img.thumbnail {
-    width: calc(100% - 14pt);
-  }
+  width: calc(100% - 14pt);
 }
 
 div.thumbnail-caption {
   font-size:small;
   padding-right:8pt;
+}
+
+@supports(display:grid) {
+  @media screen and (min-width: 400px) {
+    div.preview-thumbnail,
+    div.directory-thumbnail {
+      float: none;
+      margin: 0px;
+      display: inline-grid;
+    }
+
+    div.album-index {
+      display: grid;
+      grid-gap: 4pt;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (min-width: 650px) {
+    div.album-index {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media screen and (min-width: 950px) {
+    div.album-index {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    div.album-index {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
 }
 
