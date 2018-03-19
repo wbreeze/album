@@ -23,7 +23,7 @@ directory.  Use
 
 For example, `./c_transform.sh style/site.xsl www album`
 
-Finally, point your browser to www/album/index.html
+Finally, point your browser to `www/album/index.html`
 
 ## Trouble:
 
@@ -49,7 +49,7 @@ These short notes will help you find and install Xerces and Xalan.
 ### Xerces installation:
 
 On Mac OS the [hombrew](https://brew.sh/) package manager can
-install Xerces: `brew install xerces`
+install Xerces: `brew install xerces`. It installs the C implementation.
 
 Otherwise, the following might help
 
@@ -59,17 +59,19 @@ Download, verify, extract.
 Follow the build instructions.
 On a Linux host, the following might work well:
 
-1. cd xerces-c-3.11
-2. ./configure --prefix=$HOME/Xerces
-3. make
-4. make install
+```
+cd xerces-c-3.11
+./configure --prefix=$HOME/Xerces
+make
+make install
+```
 
-You ought to have populated lib and bin directories in $HOME/Xerces.
+You ought to have populated lib and bin directories in `$HOME/Xerces`.
 
 ### Xalan installation:
 
 On Mac OS the [hombrew](https://brew.sh/) package manager can
-install Xalan: `brew install xalan`
+install Xalan: `brew install xalan`. It installs the C implemention.
 
 Otherwise, the following might help:
 
@@ -78,20 +80,23 @@ Otherwise, the following might help:
 Download, verify, extract.
 Follow the build instructions.  On a Linux host, the following might work well
 
-1. cd xalan-c-1.11/c
-2. export XERCESCROOT=$HOME/Xerces
-3. export XALANCROOT=`pwd`
-4. ./runConfigure -p linux -c gcc -x g++ -P $HOME/Xalan
-5. make
-6. make install
+```
+cd xalan-c-1.11/c
+export XERCESCROOT=$HOME/Xerces
+export XALANCROOT=`pwd`
+./runConfigure -p linux -c gcc -x g++ -P $HOME/Xalan
+make
+make install
+```
 
-You ought to have populated lib and bin directories in $HOME/Xalan.
+You ought to have populated lib and bin directories in `$HOME/Xalan`.
 
 In order to execute Xalan:
 
+```
 export XERCESCROOT=$HOME/Xerces
 export XALANCROOT=$HOME/Xalan
 export LD_LIBRARY_PATH=$HOME/Xerces/lib:$HOME/Xalan/lib:$LD_LIBRARY_PATH
 export PATH=$HOME/Xalan/bin:$HOME
 Xalan
-
+```
