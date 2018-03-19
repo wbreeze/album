@@ -1,10 +1,10 @@
 #!/bin/bash
 
 PREVIEW_SUBDIR='preview'
-PREVIEW_SIZE='800'
+PREVIEW_SIZE='1600'
 PREVIEW_FORMAT='jpg'
 THUMB_SUBDIR='thumbnail'
-THUMB_SIZE='200'
+THUMB_SIZE='400'
 INDEX_NAME='index'
 ALBUM_THUMBNAIL_NAME='album_thumbnail.jpg'
 
