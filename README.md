@@ -43,11 +43,12 @@ file names that contain special characters.  Resolve it as follows:
 3. Exit CPAN:
    `cpan> exit`
 
-### Missing stylesheets
+### Missing CSS stylesheets
+Find sample CSS stylesheets in the `www/style` directory.
 
 You can change the stylesheet references in
 `style/layout.xsl` and `style/album.xsl` to find these stylesheets
-in whatever location you would like.
+in whatever location you would like, wherever you would like to put them.
 
 ## Xalan and Xerces
 You will need an XSL Transform engine, such as Xalan.  
@@ -55,7 +56,6 @@ Xalan in turn requires the XML parser Xerces.
 These short notes will help you find and install Xerces and Xalan.  
 
 ### Xerces installation:
-
 On Mac OS the [hombrew](https://brew.sh/) package manager can
 install Xerces: `brew install xerces`. It installs the C implementation.
 
@@ -77,7 +77,6 @@ make install
 You ought to have populated lib and bin directories in `$HOME/Xerces`.
 
 ### Xalan installation:
-
 On Mac OS the [hombrew](https://brew.sh/) package manager can
 install Xalan: `brew install xalan`. It installs the C implemention.
 
