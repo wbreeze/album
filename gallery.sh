@@ -36,7 +36,7 @@ if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
     DEST_THUMB="$THUMB_DIR/$CURF"
     [ "$SRC_IMAGE" -nt "$DEST_PREVIEW" ] && echo "$DEST_PREVIEW" && convert "$SRC_IMAGE" \
       -auto-orient \
-      -resize ${PREVIEW_SIZE}x${PREVIEW_SIZE} \
+      -resize ${PREVIEW_SIZE}x${PREVIEW_SIZE}\> \
       "$DEST_PREVIEW"
     [ "$SRC_IMAGE" -nt "$DEST_THUMB" ] && echo "$DEST_THUMB" && convert "$SRC_IMAGE" \
       -auto-orient \
