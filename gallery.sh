@@ -24,9 +24,9 @@ DEST_DIR="${ROOT_DIR}/${DEST_REL_DIR}"
 PREVIEW_DIR="${DEST_DIR}/${PREVIEW_SUBDIR}"
 THUMB_DIR="${DEST_DIR}/${THUMB_SUBDIR}"
 
-[ -e "$DEST_DIR" ] || mkdir "$DEST_DIR"
-[ -e "$PREVIEW_DIR" ] || mkdir "$PREVIEW_DIR"
-[ -e "$THUMB_DIR" ] || mkdir "$THUMB_DIR"
+[ -e "$DEST_DIR" ] || mkdir -p "$DEST_DIR"
+[ -e "$PREVIEW_DIR" ] || mkdir -p "$PREVIEW_DIR"
+[ -e "$THUMB_DIR" ] || mkdir -p "$THUMB_DIR"
 if [ -d "$PREVIEW_DIR" -a -d "$THUMB_DIR" ]; then
   # make preview and thumbnail images
   PHOTO_COUNT=0
