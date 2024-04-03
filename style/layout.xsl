@@ -12,7 +12,7 @@ will process no such elements.
 <xsl:stylesheet version='1.0' xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template name="head-content">
-  <link rel="stylesheet" type="text/css" href="/style/site.css"/>
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
 </xsl:template>
 
 <xsl:template name="body-attributes"/>
