@@ -13,38 +13,18 @@ content and any internal structure of the body.
 <xsl:import href="layout.xsl"/>
 
 <xsl:output 
- method="xml" 
+ method="html"
  version="1.0"
- encoding="UTF-8"
- doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
- doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
  indent="yes"
  media-type="text/html"/>
- 
+
 <xsl:template match="/">
-<html xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html"/>
-    <xsl:call-template name="head-content"/>
-    <xsl:apply-templates mode="head"/>
-    <xsl:if test="/node()[@style!='']">
-      <link rel="stylesheet" type="text/css">
-        <xsl:attribute name="href">
-          <xsl:value-of select="/node()/@style"/>
-        </xsl:attribute>
-      </link>
-    </xsl:if>
-    <xsl:if test="/node()[@title!='']">
-      <title>
-        <xsl:value-of select="/node()/@title"/>
-      </title>
-    </xsl:if>
-  </head>
-  <body> 
+  <xsl:text>---
+layout: home
+---
+</xsl:text>
     <xsl:call-template name="body-attributes"/>
     <xsl:call-template name="body-content"/>
-  </body>
-</html>
 </xsl:template>
 
 <xsl:template match="text()" mode="head"/>
