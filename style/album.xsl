@@ -3,7 +3,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template match="image-preview">
-  <div class="preview">
+  <div id="preview" class="preview">
     <div class="controls">
       <xsl:apply-templates select="previous"/>
       <xsl:apply-templates select="next"/>
@@ -19,7 +19,7 @@
 <xsl:template name="navigation">
   <a class="preview-navigation">
     <xsl:attribute name="href">
-      <xsl:value-of select="@loc"/>
+      <xsl:value-of select="@loc"/><xsl:text>#preview</xsl:text>
     </xsl:attribute>
     <xsl:apply-templates select="thumbnail"/>
   </a>
